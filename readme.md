@@ -52,9 +52,9 @@
 
 **训练集中文档之间的相似性排序（top20）**
 
-(https://github.com/myazi/SemHash/tree/master/png/sim2.png)
+![image](https://github.com/myazi/SemHash/tree/master/png/sim2.png)
 
-(https://github.com/myazi/SemHash/tree/master/png/sim1.png)
+![image](https://github.com/myazi/SemHash/tree/master/png/sim1.png)
 
 
 
