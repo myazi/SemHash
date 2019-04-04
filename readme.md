@@ -52,7 +52,7 @@
 
 **训练集中文档之间的相似性排序（top20）**
 
-![image](https://github.com/myazi/SemHash/blob/master/png/sim2.jpg)
+![image](https://github.com/myazi/SemHash/blob/master/png/sim2.png)
 
 ![image](https://github.com/myazi/SemHash/blob/master/png/sim1.png)
 
@@ -60,18 +60,18 @@
 
 **测试集下新文档与数据库中相似文档排序top20**
 
-![Image 003](https://github.com/myazi/SemHash/tree/master/png/Image 003.png)
+![Image](https://github.com/myazi/SemHash/blob/master/png/Image 003.png)
 
-![Image 001](https://github.com/myazi/SemHash/tree/master/png/Image 001.png)
+![Image](https://github.com/myazi/SemHash/blob/master/png/Image 001.png)
 
-![Image 018](https://github.com/myazi/SemHash/tree/master/png/Image 018.png)
+![Image](https://github.com/myazi/SemHash/blob/master/png/Image 018.png)
 
-![Image 002](https://github.com/myazi/SemHash/tree/master/png/Image 002.png)
+![Image](https://github.com/myazi/SemHash/blob/master/png/Image 002.png)
 
-![Image 017](https://github.com/myazi/SemHash/tree/master/png/Image 017.png)
+![Image](https://github.com/myazi/SemHash/blob/master/png/Image 017.png)
 
-![Image 016](https://github.com/myazi/SemHash/tree/master/png/Image 016.png)
+![Image](https://github.com/myazi/SemHash/blob/master/png/Image 016.png)
 
-![Image 014](https://github.com/myazi/SemHash/tree/master/png/Image 014.png)
+![Image](https://github.com/myazi/SemHash/blob/master/png/Image 014.png)
 
-![Image 015](https://github.com/myazi/SemHash/tree/master/png/Image 015.png)
+![Image](https://github.com/myazi/SemHash/blob/master/png/Image 015.png)
