@@ -58,7 +58,7 @@
 
 
 
-**测试集下新文档与数据库中相似文档排序top20**
+**测试集下新文档与数据库中相似文档排序(top20)**
 
 ![Image](https://github.com/myazi/SemHash/blob/master/png/Image%20001.png)
 
@@ -68,10 +68,10 @@
 
 ![Image](https://github.com/myazi/SemHash/blob/master/png/Image%20014.png)
 
-![Image](https://github.com/myazi/SemHash/blob/master/png/Image%20015.png)
+![Image](https://github.com/myazi/SemHash/blob/master/png/Image%20018.png)
 
 ![Image](https://github.com/myazi/SemHash/blob/master/png/Image%20016.png)
 
 ![Image](https://github.com/myazi/SemHash/blob/master/png/Image%20017.png)
 
-![Image](https://github.com/myazi/SemHash/blob/master/png/Image%20018.png)
+![Image](https://github.com/myazi/SemHash/blob/master/png/Image%20015.png)
