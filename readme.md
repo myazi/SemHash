@@ -1,6 +1,6 @@
 ### 文本语义哈希
 
-    语义哈希（**SemHash**）是一种文本表示方法。同主题模型一样，语义哈希是一个无监督的概率生成模型；不同之处在于，语义哈希采用低维二进制码（64bits）表示文本。用于解决大数据下，近邻查找面临的存储开销大，计算复杂度高，维度灾难等问题。由于采用低维二进制表示，向量空间的内积操作被二进制空间的异或操作取代，显著提高查询效率。该方法的样本时间复杂度为线性，适用于大规模训练数据。模型展示部分包括：文本哈希表示，语义概念推断，文本语义匹配，分四个demo文件。
+ ​	语义哈希（**SemHash**）是一种文本表示方法。同主题模型一样，语义哈希是一个无监督的概率生成模型；不同之处在于，语义哈希采用低维二进制码（64bits）表示文本。用于解决大数据下，近邻查找面临的存储开销大，计算复杂度高，维度灾难等问题。由于采用低维二进制表示，向量空间的内积操作被二进制空间的异或操作取代，显著提高查询效率。该方法的样本时间复杂度为线性，适用于大规模训练数据。模型展示部分包括：文本哈希表示，语义概念推断，文本语义匹配，分四个demo文件。
 
 ### 代码运行+环境
 
@@ -60,11 +60,11 @@
 
 **测试集下新文档与数据库中相似文档排序(top20)**
 
-![Image](https://github.com/myazi/SemHash/blob/master/png/Image%20002.png)
-
 ![Image](https://github.com/myazi/SemHash/blob/master/png/Image%20003.png)
 
 ![Image](https://github.com/myazi/SemHash/blob/master/png/Image%20001.png)
+
+![Image](https://github.com/myazi/SemHash/blob/master/png/Image%20002.png)
 
 ![Image](https://github.com/myazi/SemHash/blob/master/png/Image%20017.png)
 
