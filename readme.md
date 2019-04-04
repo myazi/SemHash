@@ -52,26 +52,26 @@
 
 **训练集中文档之间的相似性排序（top20）**
 
-![sim2](C:\Users\86923\Desktop\SemHash\png\sim2.png)
+![sim2](https://github.com/myazi/SemHash/tree/master/png/sim2.png)
 
-![sim1](C:\Users\86923\Desktop\SemHash\png\sim1.png)
+![sim1](https://github.com/myazi/SemHash/tree/master/png/sim1.png)
 
 
 
 **测试集下新文档与数据库中相似文档排序top20**
 
-![Image 003](C:\Users\86923\Desktop\SemHash\png\Image 003.png)
+![Image 003](https://github.com/myazi/SemHash/tree/master/png/Image 003.png)
 
-![Image 001](C:\Users\86923\Desktop\SemHash\png\Image 001.png)
+![Image 001](https://github.com/myazi/SemHash/tree/master/png/Image 001.png)
 
-![Image 018](C:\Users\86923\Desktop\SemHash\png\Image 018.png)
+![Image 018](https://github.com/myazi/SemHash/tree/master/png/Image 018.png)
 
-![Image 002](C:\Users\86923\Desktop\SemHash\png\Image 002.png)
+![Image 002](https://github.com/myazi/SemHash/tree/master/png/Image 002.png)
 
-![Image 017](C:\Users\86923\Desktop\SemHash\png\Image 017.png)
+![Image 017](https://github.com/myazi/SemHash/tree/master/png/Image 017.png)
 
-![Image 016](C:\Users\86923\Desktop\SemHash\png\Image 016.png)
+![Image 016](https://github.com/myazi/SemHash/tree/master/png/Image 016.png)
 
-![Image 014](C:\Users\86923\Desktop\SemHash\png\Image 014.png)
+![Image 014](https://github.com/myazi/SemHash/tree/master/png/Image 014.png)
 
-![Image 015](C:\Users\86923\Desktop\SemHash\png\Image 015.png)
+![Image 015](https://github.com/myazi/SemHash/tree/master/png/Image 015.png)
