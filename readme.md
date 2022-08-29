@@ -10,8 +10,6 @@
 
 ​			`$ python3 SemHash.py ./train`
 
-注：训练集可自行构建，下载地址见 链接: https://pan.baidu.com/s/1Swmy23Xru1Yn65Uq1Jrafg 提取码: qmtq 
-
 ##### 2 **demo展示**
 
 **文本哈希表示**	: 输出训练集中所有文档的哈希表示
@@ -32,46 +30,5 @@
 
 **训练集**：（共154篇文档，每篇文档在10000字以上）
 
-​	1 四大名著：红楼梦，三国演义，西游记，水浒传（根据各自长度分成若干子集，红楼梦每十章分为一篇文档，共12篇）
-
-​	2 武侠：射雕英雄传，神雕侠侣，倚天屠龙记，笑傲江湖，鹿鼎记（射雕英雄传分为4篇文档）
-
-​	3 论述：资本论，战争论，富国论（资本论分为6篇）
-
-​	4 恐怖：盗墓笔记，鬼吹灯 （盗墓笔记分为8篇）
-
-​	5 小黄：十本不同来源书籍
-
-​	6 其他：平凡的世界，明朝那些事，金瓶梅，西厢记，飘，乔布斯传
 
 **测试集**：（共8篇）
-
-​	红楼梦魇，天龙八部，三国史话，货币战争，经济学原理，隋唐英雄传，万历十五年，小黄书
-
-### 结果展示
-
-**训练集中文档之间的相似性排序（top20）**
-
-![image](https://github.com/myazi/SemHash/blob/master/png/sim2.png)
-
-![image](https://github.com/myazi/SemHash/blob/master/png/sim1.png)
-
-
-
-**测试集下新文档与数据库中相似文档排序(top20)**
-
-![Image](https://github.com/myazi/SemHash/blob/master/png/Image%20003.png)
-
-![Image](https://github.com/myazi/SemHash/blob/master/png/Image%20001.png)
-
-![Image](https://github.com/myazi/SemHash/blob/master/png/Image%20002.png)
-
-![Image](https://github.com/myazi/SemHash/blob/master/png/Image%20017.png)
-
-![Image](https://github.com/myazi/SemHash/blob/master/png/Image%20018.png)
-
-![Image](https://github.com/myazi/SemHash/blob/master/png/Image%20016.png)
-
-![Image](https://github.com/myazi/SemHash/blob/master/png/Image%20014.png)
-
-![Image](https://github.com/myazi/SemHash/blob/master/png/Image%20015.png)

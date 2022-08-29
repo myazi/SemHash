@@ -16,3 +16,17 @@ def gram_schmidt(X):
 
 def K(x, y):
     return x if np.abs(x) > 10e-8 else y
+
+def cal_bin_dis(a, b):
+    #return bin(a ^ b).count('1')
+    return (a ^ b)
+
+def index2hash(index, bits):
+    hash_code = ""
+    bits = bits - 1
+    while bits >= 0:
+        bit = int(index) // int(2**bits)
+        index -= 2**bits * bit
+        hash_code = hash_code + str(bit)
+        bits -= 1
+    return hash_code

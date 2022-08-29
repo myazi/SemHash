@@ -9,57 +9,73 @@ import sys
 import string
 import numpy as np
 import scipy.io
+from utils import *
 from Normalize import *
+
 if __name__ == "__main__" :
-	words = [] 
-	with open('./argfile/word.utf8','r') as f:
-		for line in f:
-			words.append(list(line.strip('\n').split(',')))	
-	print(len(words))	
-	arg = scipy.io.loadmat('./argfile/arg2.mat')
-	logPX1_B1 = arg['logPX1_B1']
-	logPX1_B0 = arg['logPX1_B0']
-	TopK = int(10)
-	MIN = -10000000
-	for i in range(logPX1_B1.shape[0]):
-		k = 0
-		print('-------------------第' + str(i) + '位哈希码下词分布--------------------')
-		print('          1        ' + '              ' + '           0           ')
-		while k < TopK:
-			max_index1 = np.argmax(logPX1_B1[i,:])
-			max_index0 = np.argmax(logPX1_B0[i,:])
-			print(str(words[max_index1]) + str(logPX1_B1[i,max_index1]) +  '  ' + str(words[max_index0]) + ' ' + str(logPX1_B0[i,max_index0]))
-			logPX1_B1[i,max_index1] = MIN
-			logPX1_B0[i,max_index0] = MIN
-			k = k + 1	
-"""
-	logPX1_B1 = normalize(logPX1_B1)
-	logPX1_B0 = normalize(logPX1_B0)
-	word_sim1 = np.dot(logPX1_B1.transpose(),logPX1_B1)
-	word_sim0 = np.dot(logPX1_B0.transpose(),logPX1_B0)
 
-	for i in range(word_sim1.shape[0]):
-		word_sim1[i,i] = MIN
-		word_sim0[i,i] = MIN
+    task_name = sys.argv[1]
+    words = [] 
+    with open("./data/" + task_name + "/arg_word.utf8",'r') as f:
+        for line in f:
+            words.append(line.strip('\n'))    
+    print(len(words))
+    arg = scipy.io.loadmat("./data/" + task_name + "/arg.mat")
+    logPX1_B1 = arg['logPX1_B1']
+    bits = logPX1_B1.shape[0]
+    logPX1_B1 = np.power(2,logPX1_B1)
+    logPX1_B0 = arg['logPX1_B0']
+    logPX1_B0 = np.power(2,logPX1_B0)
+    logPX1_B1_B0 = (logPX1_B1 - logPX1_B0)
+    logPX1_B1_B0_sign = np.zeros((logPX1_B1_B0.shape), dtype = int)
+    logPX1_B1_B0_sign[logPX1_B1_B0 >= 0] = 1
+    logPX1_B1_B0_sign[logPX1_B1_B0 < 0] = -1
 
-	TopK = int(1000)
-	k = 0
-	while k < TopK:
-		max_index1 = np.argmax(word_sim1)
-		max_index1_x = int(max_index1 / word_sim1.shape[1])
-		max_index1_y = int(max_index1 % word_sim1.shape[0])
-		
-		max_index0 = np.argmax(word_sim0)
-		max_index0_x = int(max_index0 / word_sim0.shape[1])
-		max_index0_y = int(max_index0 % word_sim0.shape[0])
-		print('------------words' + str(k)  + '---------------')
-		print(str(words[max_index1_x]) + '  ' + str(words[max_index1_y]) + '  ' + str(word_sim1[max_index1_x,max_index1_y]))
-		word_sim1[max_index1_x,max_index1_y] = MIN
-		word_sim1[max_index1_y,max_index1_x] = MIN
+    """
+    输出word2hash
+    """
+    for i in range(len(words)):
+        word = words[i]
+        word_hash = logPX1_B1_B0_sign[:,i]
+        word_hash_str = "".join([str(i if i > 0 else 0) for i in word_hash])
+        print(str(word) + "\t" + word_hash_str)
 
-		print(str(words[max_index0_x]) + '  ' + str(words[max_index0_y]) + '  ' + str(word_sim0[max_index0_x,max_index0_y]))
-		word_sim0[max_index0_x,max_index0_y] = MIN
-		word_sim0[max_index0_y,max_index0_x] = MIN
+    """
+    根据词的哈希码，打印词与词之间的相似词
+    """
+    Sim = np.dot(logPX1_B1_B0_sign.transpose(), logPX1_B1_B0_sign)
+    TopK = int(100)
+    MIN = -bits
+    for i in range(Sim.shape[0]):
+        Sim[i,i] = MIN ##去重对角线元素
+    for i in range(Sim.shape[0]):
+        k = 0
+        res_list = []
+        while k < TopK:
+            max_index = np.argmax(Sim[i,:])
+            if(Sim[i,max_index] < bits - 6): # 汉明距离在6以内
+                break
+            res_list.append("".join(words[max_index]) + ":" + str(Sim[i,max_index]))
+            #res_list.append(words[max_index])
+            Sim[i,max_index] = MIN
+            k = k + 1
+        res_str = str(words[i]) + "\t" + ",".join([str(a) for a in res_list])
+        print(res_str)
 
-		k = k + 1
-"""
+    """
+    输出每一位哈希码二值下的高频词
+    """
+    TopK = int(100)
+    MIN = 0
+    for i in range(logPX1_B1.shape[0]):
+        k = 0
+        print('-------------------第' + str(i) + '位哈希码下词分布--------------------') # 第i位哈希码二值下top100高频词
+        print('          1        ' + '\t' + '           0           ')
+        while k < TopK:
+            max_index1 = np.argmax(logPX1_B1_B0[i,:])
+            max_index0 = np.argmin(logPX1_B1_B0[i,:])
+            print(str(words[max_index1]) + ':' + str(logPX1_B1_B0[i,max_index1]) + '\t' + str(words[max_index0]) + ':' + str(logPX1_B1_B0[i,max_index0]))
+            
+            logPX1_B1_B0[i,max_index1] = MIN
+            logPX1_B1_B0[i,max_index0] = MIN
+            k = k + 1    

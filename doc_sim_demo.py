@@ -7,26 +7,63 @@
 
 import os
 import sys
+import time
 import string
 import numpy as np
 import scipy.io
+import random
+from utils import *
 
 if __name__ == "__main__" :
-	docs = [] 
-	with open('./argfile/doc.utf8','r') as f:
-		for line in f:
-			docs.append(list(line.strip('\n').split(',')))	
-	print(len(docs))	
-	arg = scipy.io.loadmat('./argfile/arg2.mat')
-	B = arg['B']
-	Sim = np.dot(B.transpose(),B)
-	TopK = int(20)
-	MIN = -10000000
-	for i in range(Sim.shape[0]):
-		k = 0
-		print('-----' + "".join(docs[i]) + '-----')
-		while k < TopK:
-			max_index = np.argmax(Sim[i,:])
-			print("".join(docs[max_index]) + '  ' + str(Sim[i,max_index]) +  '\n')
-			Sim[i,max_index] = MIN
-			k = k + 1
+
+    task_name = sys.argv[1]
+    docs = [] 
+    docs_local = [] 
+    col_rand_list = []
+    index = 0
+    with open("./data/" + task_name +  "/seg_file_orgin") as f:
+        for line in f:
+            docs.append((line.strip('\n'))) ##全集数据    
+            if int(random.random() * 10000) % 10000 == 9: ##待查询数据 
+                col_rand_list.append(index)
+                docs_local.append((line.strip('\n')))    
+            index += 1
+    print(len(docs))    
+    print(len(docs_local))
+    col_rand_array = np.array(col_rand_list)
+    col_rand_set = set(col_rand_list)
+
+    arg = scipy.io.loadmat("./data/" + task_name + "/arg.mat")
+    bits = arg['logPX1_B1'].shape[0]
+    B_index = arg['B_index']
+    B_index_local = B_index[:,col_rand_array]
+    B_index = B_index[0,:].tolist()
+    B_index_local = B_index_local[0,:].tolist()
+
+    B_index_dict = {}
+    B_index_local_dict = {}
+
+    for i in range(len(B_index)): #将哈希码相同的文档放到一起，将查询相似文档转换为查询相似的哈希码
+        if i in col_rand_set:
+            B_index_local_dict.setdefault(B_index[i], [])
+            B_index_local_dict[B_index[i]].append(docs[i])
+        else:
+            B_index_dict.setdefault(B_index[i], [])
+            B_index_dict[B_index[i]].append(docs[i])
+
+    print(len(B_index_dict)) #打印哈希码不同取值数
+
+    for k in range(len(B_index_local)):
+        a = B_index_local[k]
+        min_dis = bits
+        minb = 0
+        for b in B_index_dict:
+            a = int(a)
+            b = int(b)
+            dis = bin(a  ^  b).count('1')
+            if dis < min_dis and dis < 4: #返回最相似的哈希码，且必须最相似哈希码的距离在4内
+                min_dis = dis
+                minb = b
+        if minb != 0:
+            for i in range(min(10, len(B_index_dict[minb]))):
+                print("".join(docs_local[k]) + "\t" +  "".join(B_index_dict[minb][i]) + '\t' + str(min_dis) + "\t" + str(a) + "\t" + str(minb))
