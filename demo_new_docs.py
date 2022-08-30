@@ -11,7 +11,6 @@ import string
 import numpy as np
 import scipy
 import scipy.io
-from Normalize import *
 import jieba
 import jieba.posseg as pseg
 from jieba import analyse

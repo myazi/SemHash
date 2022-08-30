@@ -7,7 +7,6 @@
 import scipy 
 import scipy.io 
 import numpy as np
-from Normalize import *
 from utils import *
 from evaluation import *
 from Supervise import *

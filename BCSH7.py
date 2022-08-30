@@ -7,7 +7,6 @@
 import scipy 
 import scipy.io 
 import numpy as np
-from Normalize import *
 from utils import *
 
 def BCSH7(tfidf, bits=2, rand_time=8, batch=100000, iters=100, lambd=0.0005, word=[], arg_dir="./data/tmp"):

@@ -10,7 +10,6 @@ import string
 import numpy as np
 import scipy.io
 from utils import *
-from Normalize import *
 
 if __name__ == "__main__" :
 

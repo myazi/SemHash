@@ -11,95 +11,18 @@ import numpy as np
 import scipy
 import scipy.io
 from Keyword import *
-from load_sparse import *
-from ITSH import *
-from Normalize import *
 from utils import *
 from evaluation import *
 
-from BCSH1 import *
-from BCSH2 import *
+from BCSH import *
 from BCSH7 import *
+from ITSH import *
 from BCSH_paper import *
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from init_B import *
     
-def SemHash_ITSH():
-    file_name = sys.argv[1] # 训练集文件
-    topK = int(sys.argv[2]) # topK关键词
-    max_features = int(sys.argv[3]) #最大特征集合数
-    bits = int(sys.argv[4]) # 哈希码长度
-    iters = int(sys.argv[5]) # 一次学习迭代次数
-    task_name = sys.argv[6] #参数和数据保存路径
-    
-    task_dir = './data/' + task_name
-    
-    #tfidf = load_sparse(file_name) 直接加载稀疏表示数据作为输入数据
-
-    """
-    分词/分字, 结巴分词/tfidf关键词
-    """
-    seg_file = fenci(file_name, topK, False, task_dir) #返回分词后的文件
-    #seg_file = fenzi(file_name, './data/segfile_tmp')
-    #seg_file = "./data/segfile_wiki/one_file"
-    
-    #tfidf表示
-    tfidf = Tfidf(seg_file, max_features, task_dir)
-
-    B = ITSH(tfidf, bits, iters, task_dir)
-
-    #eval_retrieval(B.transpose(), label.transpose(), top_n=100)
-
-def SemHash_BCTH_paper():
-    file_name = sys.argv[1] # 训练集文件
-    topK = int(sys.argv[2]) # topK关键词
-    max_features = int(sys.argv[3]) #最大特征集合数
-    bits = int(sys.argv[4]) # 哈希码长度
-    iters = int(sys.argv[5]) # 一次学习迭代次数
-    task_name = sys.argv[6] #参数和数据保存路径
-    
-    task_dir = './data/' + task_name
-
-    ##paper实验
-    #arg = scipy.io.loadmat('./data/20ng.mat')
-    #tfidf = arg["X"]
-    #label = arg["Y"]
-    #label = np.squeeze(label,axis=0)
-    #print(label.shape)
-    #print(label)
-    #B = ITSH(tfidf, bits, iters)
-    #eval_retrieval(B.transpose(), label.transpose(), top_n=100)
-    #exit()
-
-    ##哈希表示
-    """
-    分词/分字,结巴分词/tfidf关键词
-    """
-    seg_file = fenci(file_name, topK, False, task_dir)
-    #seg_file = fenzi(file_name)
-    #seg_file = "./data/segfile_wiki/one_file"
-    
-    #tfidf表示
-    tfidf = Tfidf(seg_file, max_features, task_dir)
-    
-    #label, B, X = init_B("./data/paper_data/clue/inews/train.txt","inews") 
-    #label_test, B_test, X_test = init_B("./data/paper_data/clue/inews/test.txt","inews") 
-    #label_dev, B_dev, X_dev = init_B("./data/paper_data/clue/inews/dev.txt","inews") 
-
-    label, B, X = init_B("./data/paper_data/clue/tnews/toutiao_category_train.txt","tnews") 
-    label_dev, B_dev, X_dev = init_B("./data/paper_data/clue/tnews/toutiao_category_dev.txt","tnews") 
-    label_test, B_test, X_test = init_B("./data/paper_data/clue/tnews/toutiao_category_test.txt","tnews") 
-
-    #label, B, X = init_B("./data/paper_data/clue/thucnews/train.txt","thucnews") 
-    #label_test, B_test, X_test = init_B("./data/paper_data/clue/thucnews/test.txt","thucnews") 
-    #label_dev, B_dev, X_dev = init_B("./data/paper_data/clue/thucnews/dev.txt","thucnews") 
-
-    B = BCSH_paper(B, X, label, B_test, X_test, label_test, B_dev, X_dev, label_dev, bits, iters)
-
-    #eval_retrieval(B.transpose(), label.transpose(), top_n=100)
-
 def SemHash_BCTH():
     (allfile,path) = getFilelist(sys.argv)
     #max_feat = int(sys.argv[2])
@@ -178,5 +101,79 @@ def SemHash_BCTH7():
         f.write(str(B_str ) + '\t' + str(i) + '\n')
     f.close()
 
+def SemHash_ITSH():
+    file_name = sys.argv[1] # 训练集文件
+    topK = int(sys.argv[2]) # topK关键词
+    max_features = int(sys.argv[3]) #最大特征集合数
+    bits = int(sys.argv[4]) # 哈希码长度
+    iters = int(sys.argv[5]) # 一次学习迭代次数
+    task_name = sys.argv[6] #参数和数据保存路径
+    
+    task_dir = './data/' + task_name
+    
+    #tfidf = load_sparse(file_name) 直接加载稀疏表示数据作为输入数据
+
+    """
+    分词/分字, 结巴分词/tfidf关键词
+    """
+    seg_file = fenci(file_name, topK, False, task_dir) #返回分词后的文件
+    #seg_file = fenzi(file_name, './data/segfile_tmp')
+    #seg_file = "./data/segfile_wiki/one_file"
+    
+    #tfidf表示
+    tfidf = Tfidf(seg_file, max_features, task_dir)
+
+    B = ITSH(tfidf, bits, iters, task_dir)
+
+    #eval_retrieval(B.transpose(), label.transpose(), top_n=100)
+
+def SemHash_BCTH_paper():
+    file_name = sys.argv[1] # 训练集文件
+    topK = int(sys.argv[2]) # topK关键词
+    max_features = int(sys.argv[3]) #最大特征集合数
+    bits = int(sys.argv[4]) # 哈希码长度
+    iters = int(sys.argv[5]) # 一次学习迭代次数
+    task_name = sys.argv[6] #参数和数据保存路径
+    
+    task_dir = './data/' + task_name
+
+    ##paper实验
+    #arg = scipy.io.loadmat('./data/20ng.mat')
+    #tfidf = arg["X"]
+    #label = arg["Y"]
+    #label = np.squeeze(label,axis=0)
+    #print(label.shape)
+    #print(label)
+    #B = ITSH(tfidf, bits, iters)
+    #eval_retrieval(B.transpose(), label.transpose(), top_n=100)
+    #exit()
+
+    ##哈希表示
+    """
+    分词/分字,结巴分词/tfidf关键词
+    """
+    seg_file = fenci(file_name, topK, False, task_dir)
+    #seg_file = fenzi(file_name)
+    #seg_file = "./data/segfile_wiki/one_file"
+    
+    #tfidf表示
+    tfidf = Tfidf(seg_file, max_features, task_dir)
+    
+    #label, B, X = init_B("./data/paper_data/clue/inews/train.txt","inews") 
+    #label_test, B_test, X_test = init_B("./data/paper_data/clue/inews/test.txt","inews") 
+    #label_dev, B_dev, X_dev = init_B("./data/paper_data/clue/inews/dev.txt","inews") 
+
+    label, B, X = init_B("./data/paper_data/clue/tnews/toutiao_category_train.txt","tnews") 
+    label_dev, B_dev, X_dev = init_B("./data/paper_data/clue/tnews/toutiao_category_dev.txt","tnews") 
+    label_test, B_test, X_test = init_B("./data/paper_data/clue/tnews/toutiao_category_test.txt","tnews") 
+
+    #label, B, X = init_B("./data/paper_data/clue/thucnews/train.txt","thucnews") 
+    #label_test, B_test, X_test = init_B("./data/paper_data/clue/thucnews/test.txt","thucnews") 
+    #label_dev, B_dev, X_dev = init_B("./data/paper_data/clue/thucnews/dev.txt","thucnews") 
+
+    B = BCSH_paper(B, X, label, B_test, X_test, label_test, B_dev, X_dev, label_dev, bits, iters)
+
+    #eval_retrieval(B.transpose(), label.transpose(), top_n=100)
+
 if __name__ == "__main__": 
-    SemHash_ITSH()
+    SemHash_ITSH() #最新稳定版
