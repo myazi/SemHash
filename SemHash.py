@@ -15,7 +15,7 @@ from utils import *
 from evaluation import *
 
 from BCSH import *
-from BCSH7 import *
+from BCSH7_batch import *
 from ITSH import *
 from BCSH_paper import *
 import torch
@@ -47,6 +47,7 @@ def SemHash_BCTH():
 
     #scipy.io.savemat('X.mat',{'X': weight})  
     
+    B = BCSH1(weight)
     B = BCSH2(weight)
     print(B.shape)    
     Sim = np.dot(B.transpose(),B)
@@ -63,7 +64,7 @@ def SemHash_BCTH():
     
     f.close()
 
-def SemHash_BCTH7():
+def SemHash_BCTH_batch():
     file_name = sys.argv[1] # 训练集文件
     topK = int(sys.argv[2]) # topK关键词
     max_features = int(sys.argv[3]) #关键词全集数
@@ -78,7 +79,6 @@ def SemHash_BCTH7():
     """
     seg_file = fenci(file_name,topK)
     #seg_file = fenzi(file_name)
-    #seg_file = "./data/segfile/one_file"
     
     """
     tfidf表示
@@ -118,7 +118,6 @@ def SemHash_ITSH():
     """
     seg_file = fenci(file_name, topK, False, task_dir) #返回分词后的文件
     #seg_file = fenzi(file_name, './data/segfile_tmp')
-    #seg_file = "./data/segfile_wiki/one_file"
     
     #tfidf表示
     tfidf = Tfidf(seg_file, max_features, task_dir)
@@ -154,22 +153,21 @@ def SemHash_BCTH_paper():
     """
     seg_file = fenci(file_name, topK, False, task_dir)
     #seg_file = fenzi(file_name)
-    #seg_file = "./data/segfile_wiki/one_file"
     
     #tfidf表示
     tfidf = Tfidf(seg_file, max_features, task_dir)
     
-    #label, B, X = init_B("./data/paper_data/clue/inews/train.txt","inews") 
-    #label_test, B_test, X_test = init_B("./data/paper_data/clue/inews/test.txt","inews") 
-    #label_dev, B_dev, X_dev = init_B("./data/paper_data/clue/inews/dev.txt","inews") 
+    #label, B, X = init_B("./data/paper_data/clue/inews/train.txt","inews")
+    #label_test, B_test, X_test = init_B("./data/paper_data/clue/inews/test.txt","inews")
+    #label_dev, B_dev, X_dev = init_B("./data/paper_data/clue/inews/dev.txt","inews")
 
-    label, B, X = init_B("./data/paper_data/clue/tnews/toutiao_category_train.txt","tnews") 
-    label_dev, B_dev, X_dev = init_B("./data/paper_data/clue/tnews/toutiao_category_dev.txt","tnews") 
-    label_test, B_test, X_test = init_B("./data/paper_data/clue/tnews/toutiao_category_test.txt","tnews") 
+    label, B, X = init_B("./data/paper_data/clue/tnews/toutiao_category_train.txt","tnews")
+    label_dev, B_dev, X_dev = init_B("./data/paper_data/clue/tnews/toutiao_category_dev.txt","tnews")
+    label_test, B_test, X_test = init_B("./data/paper_data/clue/tnews/toutiao_category_test.txt","tnews")
 
-    #label, B, X = init_B("./data/paper_data/clue/thucnews/train.txt","thucnews") 
-    #label_test, B_test, X_test = init_B("./data/paper_data/clue/thucnews/test.txt","thucnews") 
-    #label_dev, B_dev, X_dev = init_B("./data/paper_data/clue/thucnews/dev.txt","thucnews") 
+    #label, B, X = init_B("./data/paper_data/clue/thucnews/train.txt","thucnews")
+    #label_test, B_test, X_test = init_B("./data/paper_data/clue/thucnews/test.txt","thucnews")
+    #label_dev, B_dev, X_dev = init_B("./data/paper_data/clue/thucnews/dev.txt","thucnews")
 
     B = BCSH_paper(B, X, label, B_test, X_test, label_test, B_dev, X_dev, label_dev, bits, iters)
 

@@ -41,7 +41,6 @@ def K(x, y):
     return x if np.abs(x) > 10e-8 else y
 
 def cal_bin_dis(a, b):
-    #return bin(a ^ b).count('1')
     return (a ^ b)
 
 def index2hash(index, bits):
