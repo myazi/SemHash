@@ -59,11 +59,8 @@ def merge_index(hash_list, train_num, K, bits):
             #print(str(index_top) + "\t" + str(min_k_index))
     return hash_list
 
-
 if __name__ == "__main__" :
-
     task_name = sys.argv[1]
-
     docs = []
     with open("./data/" + task_name + "/seg_file_orgin") as f: ##原始数据 + 分词结果文件
         for line in f:
@@ -76,14 +73,14 @@ if __name__ == "__main__" :
     print("B_index len: " + str(B_index.shape))
     hashs = {}
     for i in range(len(docs)):
-        index = B_index[0,i]
+        index = B_index[0, i]
         line2index[i] = index
         hashs.setdefault(index,[])
         hashs[index].append("\t".join(docs[i]))
         #hashs[index].append(docs[i])
     print("cluster num: " + str(len(hashs)))
-    hash_list = sorted(hashs.items(),key = lambda x:len(x[1]),reverse = True) #按簇大小排序 
-    #hash_list = sorted(hashs.items(),key = lambda x:(x[0]),reverse = True) #按哈希码值排序
+    hash_list = sorted(hashs.items(), key = lambda x:len(x[1]), reverse = True) #按簇大小排序 
+    #hash_list = sorted(hashs.items(), key = lambda x:(x[0]), reverse = True) #按哈希码值排序
     
     hash_list = merge_index(hash_list, 1000000, 100, bits) #对原始哈希聚簇进行merge
     print_line_index(task_name) ##按原始数据行号打印出数据的哈希码

@@ -15,7 +15,6 @@ import random
 from utils import *
 
 if __name__ == "__main__" :
-
     task_name = sys.argv[1]
     docs = [] 
     docs_local = [] 
@@ -36,9 +35,9 @@ if __name__ == "__main__" :
     arg = scipy.io.loadmat("./data/" + task_name + "/arg.mat")
     bits = arg['logPX1_B1'].shape[0]
     B_index = arg['B_index']
-    B_index_local = B_index[:,col_rand_array]
-    B_index = B_index[0,:].tolist()
-    B_index_local = B_index_local[0,:].tolist()
+    B_index_local = B_index[:, col_rand_array]
+    B_index = B_index[0, :].tolist()
+    B_index_local = B_index_local[0, :].tolist()
 
     B_index_dict = {}
     B_index_local_dict = {}

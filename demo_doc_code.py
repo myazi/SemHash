@@ -12,7 +12,6 @@ import numpy as np
 import scipy.io
 
 if __name__ == "__main__" :
-
     task_name = sys.argv[1]
     docs = [] 
     with open("./data/" + task_name +  "/seg_file_orgin") as f:
@@ -25,6 +24,6 @@ if __name__ == "__main__" :
     for i in range(len(docs)):
         codes = ""
         for j in range(B.shape[0]):
-            codes = codes + str(B[j,i])
+            codes = codes + str(B[j, i])
         print(str(codes) + ':  ' + "".join(docs[i]))
 

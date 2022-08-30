@@ -27,7 +27,7 @@ if __name__ == "__main__" :
 
     arg = scipy.io.loadmat("./data/" + task_name + "/arg.mat")
     B_index = arg['B_index']
-    B_index = B_index[0,:].tolist()
+    B_index = B_index[0, :].tolist()
     logPX1_B1 = arg['logPX1_B1']
     logPX1_B0 = arg['logPX1_B0']
     bits = logPX1_B1.shape[0] #哈希码长度
@@ -61,7 +61,7 @@ if __name__ == "__main__" :
         for w in word:
             if w in dics:
                index = dics.index(w)
-               doc_vec[index,i] =  1
+               doc_vec[index, i] =  1
 
     logPB1 = np.dot(logPX1_B1, doc_vec)
     logPB0 = np.dot(logPX1_B0, doc_vec)
@@ -69,9 +69,9 @@ if __name__ == "__main__" :
     tmp = (logPB1 - logPB0)
     tmp[tmp >32] = 32
     
-    PXB1 = np.power(2,tmp)
+    PXB1 = np.power(2, tmp)
     PXB1 = PXB1 / (1 + PXB1)
-    test_B = PXB1 *2 - 1
+    test_B = PXB1 * 2 - 1
     
     test_B[test_B > 0] = 1
     test_B[test_B < 0] = 0
@@ -84,7 +84,7 @@ if __name__ == "__main__" :
     for i in range(test_B.shape[1]):
         index = 0
         for j in range(bits):
-            index += 2**(bits - j - 1) * test_B[j,i]
+            index += 2**(bits - j - 1) * test_B[j, i]
         index = int(index)
         topK = 10
         for b in B_index_dict:
