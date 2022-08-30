@@ -1,0 +1,7 @@
+data
+log
+nohup.out
+lib
+output
+*.pyc
+__pycache__
