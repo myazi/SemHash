@@ -13,12 +13,14 @@ from utils import *
 
 if __name__ == "__main__" :
     task_name = sys.argv[1]
+    task_dir = "./data/" + task_name
     words = [] 
-    with open("./data/" + task_name + "/arg_word.utf8",'r') as f:
+    with open(task_dir + "/arg_word.utf8",'r') as f:
         for line in f:
             words.append(line.strip('\n'))    
     print(len(words))
-    arg = scipy.io.loadmat("./data/" + task_name + "/arg.mat")
+
+    arg = scipy.io.loadmat(task_dir + "/arg.mat")
     logPX1_B1 = arg['logPX1_B1']
     bits = logPX1_B1.shape[0]
     logPX1_B1 = np.power(2, logPX1_B1)

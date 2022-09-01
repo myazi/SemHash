@@ -25,7 +25,6 @@ def vocab(filename):
     
 #对文档进行分词处
 def fenci(file_name, topK=10, stopwords_flag = True, seg_dir = "./data/tmp"):
-
     stopwords = []
     if stopwords_flag:
         stopwords = stopwordslist('./data/stopwords.utf8')
@@ -36,7 +35,6 @@ def fenci(file_name, topK=10, stopwords_flag = True, seg_dir = "./data/tmp"):
     i = 0
     with open(file_name) as f:
       for line in f:
-         line_list = line.strip().split('\t')
          sample = line.strip()
          """
          if "tnews" in file_name:
@@ -74,12 +72,10 @@ def fenci(file_name, topK=10, stopwords_flag = True, seg_dir = "./data/tmp"):
 
     wf.close()
     wf_orgin.close()
-
     return seg_dir + "/seg_file"
 
 #分字
 def fenzi(file_name, seg_dir="./data/tmp"):
-
     if not os.path.exists(seg_dir) : 
         os.mkdir(seg_dir)
     wf = open(seg_dir + "/seg_file", "w")
@@ -87,7 +83,7 @@ def fenzi(file_name, seg_dir="./data/tmp"):
     i = 0
     with open(file_name) as f:
       for line in f:
-         line_list = re.sub('[A-Za-z0-9.\!\%\[\]]',"",line.strip())
+         line_list = re.sub('[A-Za-z0-9.\!\%\[\]]', "", line.strip())
          i+=1
          if i % 100000 == 0:
              print(line_list + "|".join(result))
@@ -102,13 +98,13 @@ def fenzi(file_name, seg_dir="./data/tmp"):
          res_orgin = line.strip() + "\t" + res
          wf.write(res)
          wf_orgin.write(res_orgin)
+
     wf.close()
     wf_orgin.close()
     return seg_tmp + "/seg_file"
 
 #读取已分词好的文档，进行TF-IDF计算
 def Tfidf(seg_file, max_feat=5000, arg_dir="./data/tmp") :
-
     if not os.path.exists(arg_dir): 
         os.mkdir(arg_dir)
     corpus = []  #存取文档的分词结果

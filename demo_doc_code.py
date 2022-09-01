@@ -13,12 +13,13 @@ import scipy.io
 
 if __name__ == "__main__" :
     task_name = sys.argv[1]
+    task_dir = "./data/" + task_name
     docs = [] 
-    with open("./data/" + task_name +  "/seg_file_orgin") as f:
+    with open(task_dir +  "/seg_file_orgin") as f:
         for line in f:
             docs.append(list(line.strip('\n').split(',')))    
     print(len(docs))    
-    arg = scipy.io.loadmat("./data/" + task_name + "/arg.mat")
+    arg = scipy.io.loadmat(task_dir + "/arg.mat")
     B = arg['B']
     B[B < 0] = 0
     for i in range(len(docs)):

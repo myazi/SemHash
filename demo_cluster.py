@@ -17,9 +17,9 @@ from itertools import chain
 line2index = {}
 index2index = {}
 
-def print_line_index(task_name="tmp"):
-    of = open("./data/" + task_name + "/seg_file_orgin_hash", 'w')
-    with open("./data/" + task_name + "/seg_file_orgin") as f:
+def print_line_index(task_dir="./data/tmp"):
+    of = open(task_dir + "/seg_file_orgin_hash", 'w')
+    with open(task_dir + "/seg_file_orgin") as f:
         for line in f:
             index = line2index[i]
             index = index2index.get(index,index)
@@ -56,21 +56,22 @@ def merge_index(hash_list, train_num, K, bits):
                 hash_list[min_k][1].append(i + "\t" + index2hash(index_top, bits))
             hash_list[top][1].clear()
             index2index[index_top] = min_k_index
-            #print(str(index_top) + "\t" + str(min_k_index))
     return hash_list
 
 if __name__ == "__main__" :
     task_name = sys.argv[1]
+    task_dir = "./data/" + task_name
     docs = []
-    with open("./data/" + task_name + "/seg_file_orgin") as f: ##原始数据 + 分词结果文件
+    with open(task_dir + "/seg_file_orgin") as f: ##原始数据 + 分词结果文件
         for line in f:
             docs.append(list(line.strip().split("\t")))
     print("docs len: " + str(len(docs)))
 
-    arg = scipy.io.loadmat("./data/" + task_name + "/arg.mat")
+    arg = scipy.io.loadmat(task_dir + "/arg.mat")
     B_index = arg['B_index']
     bits = arg['logPX1_B1'].shape[0]
     print("B_index len: " + str(B_index.shape))
+
     hashs = {}
     for i in range(len(docs)):
         index = B_index[0, i]
@@ -79,11 +80,12 @@ if __name__ == "__main__" :
         hashs[index].append("\t".join(docs[i]))
         #hashs[index].append(docs[i])
     print("cluster num: " + str(len(hashs)))
+
     hash_list = sorted(hashs.items(), key = lambda x:len(x[1]), reverse = True) #按簇大小排序 
     #hash_list = sorted(hashs.items(), key = lambda x:(x[0]), reverse = True) #按哈希码值排序
     
     hash_list = merge_index(hash_list, 1000000, 100, bits) #对原始哈希聚簇进行merge
-    print_line_index(task_name) ##按原始数据行号打印出数据的哈希码
+    print_line_index(task_dir) ##按原始数据行号打印出数据的哈希码
     
     for item in hash_list:
         index = item[0]

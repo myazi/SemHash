@@ -53,7 +53,7 @@ def BCSH1(weight, bits=64, iters=10, lambd=0.1):
         PXB1 = PXB1 / (1 + PXB1)
         Fx = PXB1 * 2 -1
 
-        Y = Update(B,bits)
+        Y = Update(B, bits)
 
         old_B = B.copy()
         for i in range(bits):
@@ -66,7 +66,7 @@ def BCSH1(weight, bits=64, iters=10, lambd=0.1):
         print('update-------------------')
         print(updateB)
      
-    scipy.io.savemat('./argfile/arg.mat',{'B': B, 'logPX1_B1': logPX1_B1, 'logPX1_B0': logPX1_B0, 'logPX0_B1': logPX0_B1, 'logPX0_B0': logPX0_B0})
+    scipy.io.savemat('./argfile/arg.mat', {'B': B, 'logPX1_B1': logPX1_B1, 'logPX1_B0': logPX1_B0, 'logPX0_B1': logPX0_B1, 'logPX0_B0': logPX0_B0})
     
     return B
 
@@ -109,7 +109,7 @@ def BCSH2(weight, bits=64, iters=10, lambd=0.1):
         tmp = (logPB1 - logPB0)  ### 规范化很重要，特征进行规范化
         tmp[tmp > 32] = 32
         
-        PXB1 = np.power(2,tmp)
+        PXB1 = np.power(2, tmp)
         PXB1 = PXB1 / (1 + PXB1)
         Fx = PXB1 * 2 -1
         
@@ -129,6 +129,6 @@ def BCSH2(weight, bits=64, iters=10, lambd=0.1):
         loss2 = np.trace(np.dot((B - Y), (B - Y).transpose()))
         Loss = loss1 + lambd * loss2
         print('Loss=' + str(Loss))    
-    scipy.io.savemat('./argfile/arg.mat',{'B': B,'logPX1_B1': logPX1_B1,'logPX1_B0': logPX1_B0})
+    scipy.io.savemat('./argfile/arg.mat', {'B': B, 'logPX1_B1': logPX1_B1, 'logPX1_B0': logPX1_B0})
     
     return B

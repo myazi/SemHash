@@ -19,8 +19,8 @@ fi
 rm -rf "./data/${task_name}"
 mkdir "./data/${task_name}"
 
-/root/anaconda3/envs/pytorch/bin/python3 SemHash.py ./data/query_all 10 10000 32  5 $task_name
+#/root/anaconda3/envs/pytorch/bin/python3 SemHash.py ./data/query_all 10 10000 32 5 $task_name ## 训练样本，关键词数，词表大小，哈希码长度，迭代次数，任务名
 
-#/root/anaconda3/envs/pytorch/bin/python3 SemHash8.py ./data/wiki_sample 20 50000 32  5
+/root/anaconda3/envs/pytorch/bin/python3 SemHash.py ./data/wiki_sample 20 50000 64 10 $task_name
 
 #/root/anaconda3/envs/pytorch/bin/python3 SemHash_paper.py ./data/query_all 10 10000 32  10 

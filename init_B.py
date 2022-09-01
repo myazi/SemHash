@@ -19,7 +19,7 @@ def get_word_hash(wordfile, argfile):
     words = [] 
     word2index = {}
     word2hash = {}
-    with open(wordfile,'r') as f:
+    with open(wordfile, 'r') as f:
         i = 0
         for line in f:
             word = line.strip('\n')
@@ -29,15 +29,15 @@ def get_word_hash(wordfile, argfile):
     arg = scipy.io.loadmat(argfile)
     bits = logPX1_B1.shape[0]
     logPX1_B1 = arg['logPX1_B1']
-    logPX1_B1 = np.power(2,logPX1_B1)
+    logPX1_B1 = np.power(2, logPX1_B1)
     logPX1_B0 = arg['logPX1_B0']
-    logPX1_B0 = np.power(2,logPX1_B0)
+    logPX1_B0 = np.power(2, logPX1_B0)
     logPX1_B1_B0 = (logPX1_B1 - logPX1_B0) / (logPX1_B1 + logPX1_B0) 
     logPX1_B1_B0_sign = np.zeros((logPX1_B1_B0.shape), dtype = int)
     logPX1_B1_B0_sign[logPX1_B1_B0 >= 0] = 1
     logPX1_B1_B0_sign[logPX1_B1_B0 < 0] = -1
     for i in range(len(words)):
-        word2hash[words[i]] = logPX1_B1_B0_sign[:,i]
+        word2hash[words[i]] = logPX1_B1_B0_sign[:, i]
     return word2hash, word2index
 
 def word2sample_hash(seg_file, word2hash, word2index):

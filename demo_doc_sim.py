@@ -16,11 +16,12 @@ from utils import *
 
 if __name__ == "__main__" :
     task_name = sys.argv[1]
+    task_dir = "./data/" + task_name
     docs = [] 
     docs_local = [] 
     col_rand_list = []
     index = 0
-    with open("./data/" + task_name +  "/seg_file_orgin") as f:
+    with open(task_dir +  "/seg_file_orgin") as f:
         for line in f:
             docs.append((line.strip('\n'))) ##全集数据    
             if int(random.random() * 10000) % 10000 == 9: ##待查询数据 
@@ -32,7 +33,7 @@ if __name__ == "__main__" :
     col_rand_array = np.array(col_rand_list)
     col_rand_set = set(col_rand_list)
 
-    arg = scipy.io.loadmat("./data/" + task_name + "/arg.mat")
+    arg = scipy.io.loadmat(task_dir + "/arg.mat")
     bits = arg['logPX1_B1'].shape[0]
     B_index = arg['B_index']
     B_index_local = B_index[:, col_rand_array]
@@ -41,7 +42,6 @@ if __name__ == "__main__" :
 
     B_index_dict = {}
     B_index_local_dict = {}
-
     for i in range(len(B_index)): #将哈希码相同的文档放到一起，将查询相似文档转换为查询相似的哈希码
         if i in col_rand_set:
             B_index_local_dict.setdefault(B_index[i], [])
@@ -49,7 +49,6 @@ if __name__ == "__main__" :
         else:
             B_index_dict.setdefault(B_index[i], [])
             B_index_dict[B_index[i]].append(docs[i])
-
     print(len(B_index_dict)) #打印哈希码不同取值数
 
     for k in range(len(B_index_local)):

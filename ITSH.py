@@ -11,15 +11,15 @@ from utils import *
 from evaluation import *
 
 def ITSH(weight, bits=1, iters=10, arg_dir='./data/tmp'):
-    [m,n] = weight.shape
+    [m, n] = weight.shape
     B = np.random.randint(0, 2, (bits, m))#,dtype='int8') #随机初始化哈希码B
     B[B == 0] = -1
 
     for it in range(iters):
         print("===============" + str(it) + "================")
         for r in range(bits):
-            B_bit = B[r,:].reshape(1,m)
-            tempB0 = -B[r,:].reshape(1,m)
+            B_bit = B[r, :].reshape(1, m)
+            tempB0 = -B[r, :].reshape(1, m)
             tempB1 = -tempB0
             tempB0[tempB0 < 0] = 0
             tempB1[tempB1 < 0] = 0
@@ -50,22 +50,22 @@ def ITSH(weight, bits=1, iters=10, arg_dir='./data/tmp'):
 
             ##位平衡约束
             alpha1 = 0.5
-            bit_balance = np.sum(B_bit,axis=1).reshape(1,1) / m
-            print(bit_balance[0,0])
+            bit_balance = np.sum(B_bit, axis=1).reshape(1, 1) / m
             Fx -= alpha1 * bit_balance 
+            print(bit_balance[0, 0])
 
             ##位独立约束
             alpha2 = 0.1
             bit_un = np.dot(B_bit, B.transpose()).reshape(1, bits) / m
-            for i in range(r,bits):
-                bit_un[0,i] = 0
-            bit_un_res = np.dot(bit_un,B).reshape(1,m)
+            for i in range(r, bits):
+                bit_un[0, i] = 0
+            bit_un_res = np.dot(bit_un, B).reshape(1, m)
             Fx -= alpha2 * bit_un_res
             #print(bit_un_res)
 
             #old_B = B.copy() 
-            B[r, Fx[0,:] < 0] = -1
-            B[r, Fx[0,:] > 0] = 1
+            B[r, Fx[0, :] < 0] = -1
+            B[r, Fx[0, :] > 0] = 1
             #updateB = sum(sum(B!=old_B))
             #print(updateB)
 
@@ -118,5 +118,5 @@ def ITSH(weight, bits=1, iters=10, arg_dir='./data/tmp'):
             index += 2** (bits - j - 1) * Bs[j, i]
         B_index.append(index)
     B_index = np.array(B_index)
-    scipy.io.savemat(arg_dir + '/arg.mat', {'B_index':B_index,'logPX1_B1': logPX1_B1,'logPX1_B0': logPX1_B0})    
+    scipy.io.savemat(arg_dir + '/arg.mat', {'B_index': B_index,'logPX1_B1': logPX1_B1,'logPX1_B0': logPX1_B0})    
     return Bs

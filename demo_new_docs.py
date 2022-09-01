@@ -21,11 +21,11 @@ import re
 from utils import *
 
 if __name__ == "__main__" : 
-
     task_name = sys.argv[1]
     filename = sys.argv[2]
+    task_dir = "./data/" + task_name
 
-    arg = scipy.io.loadmat("./data/" + task_name + "/arg.mat")
+    arg = scipy.io.loadmat(task_dir + "/arg.mat")
     B_index = arg['B_index']
     B_index = B_index[0, :].tolist()
     logPX1_B1 = arg['logPX1_B1']
@@ -33,12 +33,12 @@ if __name__ == "__main__" :
     bits = logPX1_B1.shape[0] #哈希码长度
     
     train_docs = []
-    with open("./data/" + task_name + "/seg_file_orgin") as f:
+    with open(task_dir + "/seg_file_orgin") as f:
          for line in f:
              train_docs.append(line.strip())
 
     dics = []   
-    with open("./data/" + task_name + "/arg_word.utf8",'r') as f:
+    with open(task_dir + "/arg_word.utf8",'r') as f:
          for line in f:
              dics.append(line.strip())	
   
@@ -78,7 +78,7 @@ if __name__ == "__main__" :
 
     B_index_dict = {}
     for i in range(len(B_index)):
-        B_index_dict.setdefault(B_index[i],[])
+        B_index_dict.setdefault(B_index[i], [])
         B_index_dict[B_index[i]].append(train_docs[i])
 
     for i in range(test_B.shape[1]):
