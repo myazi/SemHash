@@ -17,12 +17,9 @@ from BCSH import *
 from BCSH_batch import *
 from ITSH import *
 from BCSH_paper import *
-import torch
-import torch.nn as nn
-import torch.nn.functional as F
 from init_B import *
     
-def SemHash_BCTH():
+def SemHash_BCSH():
     (allfile,path) = getFilelist(sys.argv)
     #max_feat = int(sys.argv[2])
     #bits = sys.argv[3]
@@ -46,7 +43,7 @@ def SemHash_BCTH():
 
     #scipy.io.savemat('X.mat', {'X': weight})  
     
-    B = BCSH1(weight)
+    #B = BCSH1(weight)
     B = BCSH2(weight)
     print(B.shape)    
     Sim = np.dot(B.transpose(), B)
@@ -62,7 +59,7 @@ def SemHash_BCTH():
     
     f.close()
 
-def SemHash_BCTH_batch():
+def SemHash_BCSH_batch():
     file_name = sys.argv[1] # 训练集文件
     topK = int(sys.argv[2]) # topK关键词
     max_features = int(sys.argv[3]) #关键词全集数
@@ -87,7 +84,7 @@ def SemHash_BCTH_batch():
         f.write(word[j] + "\n")
 
     f.close()
-    B = BCSH7(tfidf, bits, rand_time, batch, iters, lambd, word)
+    B = BCSH_batch(tfidf, bits, rand_time, batch, iters, lambd, word)
     print(B.shape)    
     B[B < 0] = 0
     B = B.astype(int)
@@ -134,7 +131,7 @@ def SemHash_ITSH():
 
     #eval_retrieval(B.transpose(), label.transpose(), top_n=100)
 
-def SemHash_BCTH_paper():
+def SemHash_BCSH_paper():
     file_name = sys.argv[1] # 训练集文件
     topK = int(sys.argv[2]) # topK关键词
     max_features = int(sys.argv[3]) #最大特征集合数
@@ -170,4 +167,4 @@ def SemHash_BCTH_paper():
     #eval_retrieval(B.transpose(), label.transpose(), top_n=100)
 
 if __name__ == "__main__": 
-    SemHash_ITSH() #最新稳定版
+    SemHash_ITSH() #稳定版

@@ -55,7 +55,7 @@ def ITSH(weight, bits=1, iters=10, arg_dir='./data/tmp'):
             print(bit_balance[0, 0])
 
             ##位独立约束
-            alpha2 = 0.1
+            alpha2 = 0.5
             bit_un = np.dot(B_bit, B.transpose()).reshape(1, bits) / m
             for i in range(r, bits):
                 bit_un[0, i] = 0

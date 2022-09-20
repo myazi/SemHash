@@ -28,8 +28,8 @@ if __name__ == "__main__" :
                 col_rand_list.append(index)
                 docs_local.append((line.strip('\n')))    
             index += 1
-    print(len(docs))    
-    print(len(docs_local))
+    print("all doc num: " + str(len(docs)))
+    print("test doc num:" + str(len(docs_local)))
     col_rand_array = np.array(col_rand_list)
     col_rand_set = set(col_rand_list)
 
@@ -49,7 +49,7 @@ if __name__ == "__main__" :
         else:
             B_index_dict.setdefault(B_index[i], [])
             B_index_dict[B_index[i]].append(docs[i])
-    print(len(B_index_dict)) #打印哈希码不同取值数
+    print("cluster num: " + str(len(B_index_dict))) #打印哈希码不同取值数
 
     for k in range(len(B_index_local)):
         a = B_index_local[k]

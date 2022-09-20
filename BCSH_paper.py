@@ -9,7 +9,7 @@ import scipy.io
 import numpy as np
 from utils import *
 from evaluation import *
-from Supervise import *
+from supervise import *
 
 def save_arg(B,weight,bits):
     [m, n] = weight.shape

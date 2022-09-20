@@ -54,7 +54,6 @@ if __name__ == "__main__" :
             seg_list = tfidf(sample, topK=5)
             test_docs.append(sample)
             test_seg_list.append(seg_list)
-    print(test_docs)
     doc_vec = np.zeros((len(dics),len(test_seg_list)))
     for i in range(len(test_seg_list)):
         word = test_seg_list[i]

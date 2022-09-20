@@ -63,7 +63,7 @@ def fenci(file_name, topK=10, stopwords_flag = True, seg_dir = "./data/tmp"):
              seg = ''.join(seg.split())
              if (seg != '' and seg != "\n" and seg != "\n\n" and seg not in stopwords):
                 result.append(seg)
-         if len(result) < 2: continue #切词数量小于2过滤
+         if len(result) < 2: continue #切词数量小于2数据过滤
          if result:
              res = '|'.join(result) + "\n"
              res_orgin = line.strip('\n') + "\t" + res

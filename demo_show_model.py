@@ -18,7 +18,7 @@ if __name__ == "__main__" :
     with open(task_dir + "/arg_word.utf8",'r') as f:
         for line in f:
             words.append(line.strip('\n'))    
-    print(len(words))
+    print("vocabulary set num: " + str(len(words)))
 
     arg = scipy.io.loadmat(task_dir + "/arg.mat")
     logPX1_B1 = arg['logPX1_B1']
@@ -43,7 +43,7 @@ if __name__ == "__main__" :
     """
     根据词的哈希码，打印词与词之间的相似词
     """
-    Sim = np.dot(logPX1_B1_B0_sign.transpose(), logPX1_B1_B0_sign)
+    Sim = np.dot(logPX1_B1_B0_sign.transpose(), logPX1_B1_B0_sign)#词表较大时，比较耗内存
     TopK = int(100)
     MIN = -bits
     for i in range(Sim.shape[0]):
