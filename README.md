@@ -1,7 +1,7 @@
 # **语义哈希（Semantic Hash）**
 语义哈希是一种离散向量表示方法，通过将数据从原始空间映射到低维(64bits)二进制空间，解决大规模数据下近邻检索面临的存储开销大、计算复杂度高、维度灾难等问题. 
 
-这里我们首次提出BCTH: A Novel Text Hashing Approach via Bayesian Clustering，通过贝叶斯聚类学习文档的二进制表示、同时引入code balance来保证二进制码的高质量. 然而，BCTH中的code balance限制了算法的性能(难以处理亿级别训练数据). 因此，提出ITSH: Iterative Semantic Hashing，按位(bit)交替迭代学习二进制码，在每一位二进制码学习过程中建模code balance. 相对BCTH，ITSH在算法性能和高质量二进制码上有显著提升. 同时，我们发现语义哈希能学习到语义相近的词具有相近的二进制表示，对此我们也在探索词的哈希表示(word2hash).
+这里我们首次提出BCTH: A Novel Text Hashing Approach via Bayesian Clustering，通过贝叶斯聚类学习文档的二进制表示、同时引入code balance来保证二进制码的高质量. 然而，BCTH中code balance限制了算法的性能(难以处理亿级别训练数据). 因此，提出ITSH: Iterative Semantic Hashing，按位(bit)交替迭代学习二进制码，在每一位二进制码学习过程中建模code balance. 相对BCTH，ITSH在算法性能和高质量二进制码上有显著提升. 同时，我们发现语义哈希能学习到语义相近的词具有相近的二进制表示，对此我们也在探索词的哈希表示(word2hash).
 
 ### BCTH: A Novel Text Hashing Approach via Bayesian Clustering
 
@@ -94,4 +94,9 @@ python3 demo_show_model.py $task_name > ${task_name}_model
 
 曹操    不下:64,之众:64,之策:64,公孙瓒:64,关羽:64,军粮:64,刘备:64,刘牢之:64,刘璋:64,刘表:64,刘邦:64,吕布:64,吕蒙:64,周勃:64,周瑜:64
 
+| 单词              | 相似单词 |
+| ----------------- | ----- |
+|一一对应 | 下界:64, 不动点 |
+|xxx | xxx |
+|xxx | xxx |
 ## 文献
