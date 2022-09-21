@@ -48,7 +48,8 @@ python3 demo_show_model.py $task_name > ${task_name}_model
 ```
 
 ## 效果
-| 哈希码index | 原数据 |
+**[10万query测试集 32bits 哈希码聚簇]**
+| 哈希码index | query |
 | ----------------- | ------ |
 | 2747264068 | 三亚 到底在哪儿 |
 | 2747264068 | 三亚 哪个省 |
