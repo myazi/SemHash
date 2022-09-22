@@ -74,3 +74,14 @@ python3 demo_show_model.py $task_name > ${task_name}_model
 | 曹操 | 公孙瓒:64,关羽:64,军粮:64,刘备:64,刘牢之:64,刘璋:64,刘表:64,刘邦:64,吕布:64,吕蒙:64,周勃:64,周瑜:64,夏侯渊:64,大乱:64,姜维:64,孙坚:64,孙权:64,孙策:64,引兵:64,张鲁:64,数万:64,曹仁:64,檄文:64,用兵:64,缺粮:64,萧何:64,董卓:64,袁尚:64,袁术:64,袁绍:64,袁谭:64,诸葛亮:64,谋士:64,赤壁之战:64,轻骑:64,运粮:64,不下:64,之众:64,之策:64,连年:64,邓艾:64,钟会:64,陆逊:64,项羽:64,马超:64,鲁肃:64,三十万:62,三千余:62,东吴:62,中行:62,之兵:62,之势:62,之盟:62,之计:62,二万:62,五千:62,令狐:62,会盟:62,何进:62,余众:62,余党:62,作乱:62,侯景:62,元军:62,元氏:62,兴兵:62,兵变:62,兵权:62,内应:62,军师:62,出城:62,出降:62,击破:62,函谷关:62,刘曜:62,刘毅:62,刘琨:62,刘禅:62,刘聪:62,刘裕:62,前燕:62,助战:62,募兵:62,北宫:62,十万:62,十余:62,十余万:62,单骑:62,南侵:62,南燕:62,卢循:62,厚待:62,发丧:62,司马师:62,司马懿:62,司马昭:62,司马氏:62,司马越:62,司马道子:62,司马颖:62 |
 | 一院制 | 两院制:62,小党:62,国民议会:60,欧洲议会:60,立法机关:60,立法机构:60,两院:58,代表制:58,众议院:58,党籍:58,制宪会议:58,执政党:58,绝对多数:58,自民党:58,议会:58,议院:58 |
 ## 文献
+```
+@inproceedings{wenjie-etal-2020-bcth,
+    title = "{BCTH}: A Novel Text Hashing Approach via {B}ayesian Clustering",
+    author = "Wenjie, Ying  and Le, Yuquan  and Xiong, Hantao",
+    booktitle = "Proceedings of the 1st Conference of the Asia-Pacific Chapter of the Association for Computational Linguistics and the 10th International Joint Conference on Natural Language Processing",
+    year = "2020",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2020.aacl-main.7",
+    pages = "54--62"
+}
+```
