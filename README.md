@@ -3,7 +3,7 @@
 
 这里我们首次提出BCTH: A Novel Text Hashing Approach via Bayesian Clustering，通过贝叶斯聚类学习文档的二进制表示、同时引入code balance来保证二进制码的质量. 然而，BCTH中code balance限制了算法的性能(难以处理亿级别训练数据). 因此，提出ITSH: Iterative Semantic Hashing，按位(bit)交替迭代学习二进制码，在每一位二进制码学习过程中建模code balance. 相对BCTH，ITSH在算法性能和二进制码质量上有显著提升. 同时，我们发现语义哈希能学习到语义相近的词具有相近的二进制，对此我们也在探索词的哈希表示(word2hash).
 
-### BCTH: A Novel Text Hashing Approach via Bayesian Clustering
+### BCTH: A Novel Text Hashing Approach via Bayesian Clustering [paper](https://aclanthology.org/2020.aacl-main.7/)
 
 ![BCTH1](./docs/img/BCTH1.png)
 
