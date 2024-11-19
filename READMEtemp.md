@@ -96,7 +96,7 @@ pip install decord opencv-python git+https://github.com/facebookresearch/pytorch
 ├── data          
 ├── docs
 ├── models        # each modules used in our project
-│   ├── GLIGEN
+├── data          
 │   ├── i2vgen-xl
 │   ├── SEEM
 │   └── StableVideo
@@ -106,6 +106,7 @@ pip install decord opencv-python git+https://github.com/facebookresearch/pytorch
 │   ├── SEEM
 │   └── StableVideo
 └── utils
+├── scripts
     ├── model
     │   ├── language_model
     │   ├── multimodal_encoder
