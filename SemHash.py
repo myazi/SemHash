@@ -10,14 +10,14 @@ import string
 import numpy as np
 import scipy
 import scipy.io
-from utils import *
-from evaluation import *
-from Keyword import *
-from BCSH import *
-from BCSH_batch import *
-from ITSH import *
-from BCSH_paper import *
-from init_B import *
+from utils.utils import *
+from utils.evaluation import *
+from utils.Keyword import *
+from utils.init_B import *
+from models.BCSH import *
+from models.BCSH_batch import *
+from models.ITSH import *
+from models.BCSH_paper import *
     
 def SemHash_BCSH():
     (allfile,path) = getFilelist(sys.argv)
